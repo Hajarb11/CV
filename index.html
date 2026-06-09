@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hajar Benjdya — Building & Strategic Design Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #F5F0E8;
+      --bg-soft:    #EDE6DA;
+      --text:       #2C1A0E;
+      --text-muted: #7A6555;
+      --accent:     #8B3A3A;
+      --accent-light: #C4836A;
+      --divider:    #D9CFBF;
+      --white:      #FFFCF7;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body:  'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 max(2rem, 5vw);
+      height: 58px;
+    }
+
+    .nav-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: var(--white) !important;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      font-size: 0.75rem !important;
+      letter-spacing: 0.08em !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: #6d2d2d !important; }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem max(2rem, 5vw) 4rem;
+      max-width: 1100px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 0.15em;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+      /* Signature: drawn-underline animation */
+      position: relative;
+      display: inline-block;
+    }
+
+    h1 em::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 4px;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-light);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: draw-line 0.9s 0.4s cubic-bezier(0.25,1,0.5,1) forwards;
+    }
+
+    @keyframes draw-line {
+      to { transform: scaleX(1); }
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-top: 1.75rem;
+      line-height: 1.7;
+    }
+
+    .hero-tagline strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-meta {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.5rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+    .hero-meta svg { opacity: 0.6; flex-shrink: 0; }
+
+    .hero-ctas {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.6rem;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn-primary:hover { background: #6d2d2d; }
+
+    .btn-secondary {
+      border: 1px solid var(--divider);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── LAYOUT ────────────────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      padding: 0 max(2rem, 5vw);
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--divider);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-num {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--accent);
+      min-width: 1.8rem;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-body {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .about-body p + p { margin-top: 1rem; }
+
+    .about-body strong { color: var(--text); font-weight: 500; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--divider);
+      padding: 1.4rem 1.6rem;
+      border-radius: 2px;
+    }
+
+    .stat-card .stat-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-card .stat-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── EXPERIENCE ─────────────────────────────────────── */
+    .exp-list { display: flex; flex-direction: column; gap: 2.5rem; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 1.5rem 2.5rem;
+      align-items: start;
+    }
+
+    .exp-meta {
+      text-align: right;
+      padding-top: 0.15rem;
+    }
+
+    .exp-dates {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .exp-org {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .exp-content {}
+
+    .exp-role {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .exp-bullets li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding-left: 1.1rem;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent-light);
+      font-size: 0.75rem;
+      top: 0.1rem;
+    }
+
+    .exp-bullets strong { color: var(--text); font-weight: 500; }
+
+    .exp-divider {
+      border: none;
+      border-top: 1px solid var(--divider);
+      margin-left: calc(180px + 2.5rem);
+    }
+
+    /* ── SKILLS ─────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-group {
+      background: var(--white);
+      border: 1px solid var(--divider);
+      padding: 1.5rem 1.6rem;
+      border-radius: 2px;
+    }
+
+    .skill-group-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-tag {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: var(--bg-soft);
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+
+    .lang-list {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-item { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .lang-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .lang-level {
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── EDUCATION ─────────────────────────────────────── */
+    .edu-list { display: flex; flex-direction: column; gap: 2rem; }
+
+    .edu-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0.5rem 2.5rem;
+      align-items: start;
+    }
+
+    .edu-year {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 0.2rem;
+      text-align: right;
+    }
+
+    .edu-degree {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .edu-school {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .edu-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+
+    /* ── CONTACT ─────────────────────────────────────────── */
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-copy h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-copy p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      text-decoration: none;
+      padding: 1rem 1.2rem;
+      background: var(--white);
+      border: 1px solid var(--divider);
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    .contact-link svg { color: var(--accent); flex-shrink: 0; }
+
+    .contact-link-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--divider);
+      padding: 2rem max(2rem, 5vw);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+      .exp-meta { text-align: left; }
+      .exp-divider { margin-left: 0; }
+
+      .edu-item { grid-template-columns: 1fr; gap: 0.2rem; }
+      .edu-year { text-align: left; }
+
+      .contact-inner { grid-template-columns: 1fr; }
+
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      h1 em::after { animation: none; transform: scaleX(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#top" class="nav-name">Hajar Benjdya</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="container" id="top">
+    <div class="hero">
+      <div class="hero-eyebrow">Building &amp; Strategic Design Engineer</div>
+      <h1>Hajar<br><em>Benjdya</em></h1>
+      <p class="hero-tagline">
+        I turn complex problems into <strong>clear plans with actionable results</strong> —
+        combining an architectural engineering lens with business-oriented strategy to build
+        sustainable solutions from the ground up.
+      </p>
+      <div class="hero-meta">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          København, Denmark
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          MSc Architectural Engineering, DTU
+        </span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+        <a href="#experience" class="btn btn-secondary">View experience</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>About</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-body">
+          <p>
+            I'm a <strong>strategic solver</strong> with a simple approach: start by understanding
+            the real problem and the people involved, then translate that into a clear plan. I
+            thrive at the intersection of technical depth and human-centered thinking — equally
+            comfortable sketching a building system and pitching a funding proposal.
+          </p>
+          <p>
+            My background in architectural engineering gives me a rigorous, systems-level lens.
+            My experience bridging researchers, industry partners, and students has made me a
+            <strong>stakeholder translator</strong> — someone who can hold a conversation between a
+            biologist and an architect without losing the thread.
+          </p>
+          <p>
+            I bring <strong>methodical analysis, broad stakeholder management</strong>, an
+            international upbringing, simple communication, and dry humor to every team I join.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-icon">🏗️</div>
+            <div class="stat-label">Funding Secured</div>
+            <div class="stat-text">650,000 DKK from DTU senior leadership to establish current research position</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-label">Stakeholders Led</div>
+            <div class="stat-text">8+ professors, researchers &amp; industry partners aligned under a shared vision</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎓</div>
+            <div class="stat-label">Students Supported</div>
+            <div class="stat-text">150–200+ students supported across interdisciplinary and design courses</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🌍</div>
+            <div class="stat-label">Languages</div>
+            <div class="stat-text">English (native) · Arabic · French · Danish — cross-cultural collaboration</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>Experience</h2>
+      </div>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-dates">Jul 2025 – Present</div>
+            <div class="exp-org">DTU</div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-role">Researcher &amp; Project Coordinator</div>
+            <ul class="exp-bullets">
+              <li><strong>Led engagement</strong> for a major initiative, bringing together 8+ professors, researchers, and industry partners under a shared vision — navigating differing priorities and finding common ground.</li>
+              <li><strong>Co-developed</strong> strategic proposals and funding pitches, successfully <strong>securing 650,000 DKK</strong> from senior leadership to establish the current research position.</li>
+              <li>Manages a teaching team of 2 assistants and 3 PhDs, coordinating tasks and workflows to support <strong>150+ students</strong> in interdisciplinary projects — improving delivery and communication across the board.</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="exp-divider" />
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-dates">Sep 2024 – Jun 2025</div>
+            <div class="exp-org">DTU</div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-role">Lead Teaching Assistant</div>
+            <ul class="exp-bullets">
+              <li>Taught on <em>Agile Prototyping (41938)</em> and <em>Advanced Building Design (41936)</em>.</li>
+              <li><strong>Facilitated co-design workshops</strong>, bridging technical knowledge with user engagement to optimize learning outcomes.</li>
+              <li>Delivered clear presentations and briefings to <strong>200+ students</strong>, translating complex technical material into accessible, actionable instructions.</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="exp-divider" />
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-dates">Jan 2024 – Jul 2024</div>
+            <div class="exp-org">Rambøll</div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-role">Sustainable Design Intern</div>
+            <ul class="exp-bullets">
+              <li>Analyzed complex policy and environmental data to generate <strong>strategic insights and evidence-based recommendations</strong> for climate resilience projects.</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="exp-divider" />
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-dates">Jun 2023</div>
+            <div class="exp-org">DTU Skylab</div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-role">Next Generation City Action</div>
+            <ul class="exp-bullets">
+              <li>Designed and facilitated a <strong>collaborative board game</strong> for regenerative cities workshops, promoting human-centered sustainable development strategies and stakeholder engagement in climate adaptation.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>Skills</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-name">Strategic &amp; Design</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Holistic strategy</span>
+            <span class="skill-tag">Funding pitches</span>
+            <span class="skill-tag">Co-design workshops</span>
+            <span class="skill-tag">Sustainable systems</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-name">Stakeholder &amp; Leadership</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Stakeholder management</span>
+            <span class="skill-tag">Team coordination</span>
+            <span class="skill-tag">Workshop facilitation</span>
+            <span class="skill-tag">Cross-functional comms</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-name">Technical</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Matlab</span>
+            <span class="skill-tag">Revit</span>
+            <span class="skill-tag">LaTeX</span>
+            <span class="skill-tag">Microsoft Excel</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-name">Design Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Adobe Illustrator</span>
+            <span class="skill-tag">Adobe Photoshop</span>
+            <span class="skill-tag">Adobe Creative Cloud</span>
+            <span class="skill-tag">PowerPoint</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-name">Soft Skills</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Analytical problem-solving</span>
+            <span class="skill-tag">Detail orientation</span>
+            <span class="skill-tag">Complex synthesis</span>
+            <span class="skill-tag">Clear communication</span>
+          </div>
+        </div>
+      </div>
+      <div class="lang-list">
+        <div class="lang-item">
+          <span class="lang-name">English</span>
+          <span class="lang-level">Native</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Arabic</span>
+          <span class="lang-level">Proficient</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">French</span>
+          <span class="lang-level">Proficient</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Danish</span>
+          <span class="lang-level">Understand it</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Education</h2>
+      </div>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-year">2022 – 2025</div>
+          <div>
+            <div class="edu-degree">MSc in Architectural Engineering</div>
+            <div class="edu-school">Technical University of Denmark (DTU)</div>
+            <div class="edu-note">Specialized in Building Design &amp; Strategic Sustainable Systems. Thesis focused on multidisciplinary design problem-solving and sustainable strategic recommendations.</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">2018 – 2021</div>
+          <div>
+            <div class="edu-degree">BSc in General Engineering</div>
+            <div class="edu-school">Technical University of Denmark (DTU)</div>
+            <div class="edu-note">Developed a broad engineering foundation for engaging with complex concepts across disciplines.</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">2021</div>
+          <div>
+            <div class="edu-degree">Erasmus Exchange</div>
+            <div class="edu-school">Queen Mary University of London, UK</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>Contact</h2>
+      </div>
+      <div class="contact-inner">
+        <div class="contact-copy">
+          <h3>Let's build something worth building.</h3>
+          <p>
+            Whether you're working on a sustainability challenge, need someone who can
+            bridge strategy and technical execution, or want to collaborate on research —
+            I'd love to hear from you.
+          </p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:hajar_benjdya@hotmail.com" class="contact-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div>
+              <div class="contact-link-label">Email</div>
+              hajar_benjdya@hotmail.com
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/hajarbenjdya" target="_blank" rel="noopener" class="contact-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <div>
+              <div class="contact-link-label">LinkedIn</div>
+              linkedin.com/in/hajarbenjdya
+            </div>
+          </a>
+          <a href="tel:+4550251554" class="contact-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.6a16 16 0 0 0 6.49 6.49l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div>
+              <div class="contact-link-label">Phone</div>
+              +45 50 25 15 54
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Hajar Benjdya · København</span>
+    <span>Building &amp; Strategic Design Engineer</span>
+  </footer>
+
+</body>
+</html>
